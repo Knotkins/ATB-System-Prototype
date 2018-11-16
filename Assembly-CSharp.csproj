@@ -53,13 +53,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BaseEnemy.cs" />
-     <Compile Include="Assets\Scripts\BaseHero.cs" />
-     <Compile Include="Assets\Scripts\BattleStateMachine.cs" />
-     <Compile Include="Assets\Scripts\EnemySelectButton.cs" />
-     <Compile Include="Assets\Scripts\EnemyStateMachine.cs" />
+     <Compile Include="Assets\Scripts\Attacks\AttackButton.cs" />
+     <Compile Include="Assets\Scripts\Attacks\BaseAttack.cs" />
+     <Compile Include="Assets\Scripts\Attacks\MagicAttacks\Fire1Spell.cs" />
+     <Compile Include="Assets\Scripts\Attacks\MagicAttacks\Poison1Spell.cs" />
+     <Compile Include="Assets\Scripts\Attacks\MeleeAttacks\HPGD.cs" />
+     <Compile Include="Assets\Scripts\Attacks\MeleeAttacks\RightHook.cs" />
+     <Compile Include="Assets\Scripts\Attacks\MeleeAttacks\Slash.cs" />
+     <Compile Include="Assets\Scripts\BaseClass\BaseClass.cs" />
+     <Compile Include="Assets\Scripts\BaseClass\BaseEnemy.cs" />
+     <Compile Include="Assets\Scripts\BaseClass\BaseHero.cs" />
+     <Compile Include="Assets\Scripts\GUI\EnemySelectButton.cs" />
+     <Compile Include="Assets\Scripts\GUI\HeroPanelStats.cs" />
      <Compile Include="Assets\Scripts\HandleTurns.cs" />
-     <Compile Include="Assets\Scripts\HeroStateMachine.cs" />
+     <Compile Include="Assets\Scripts\StateMachines\BattleStateMachine.cs" />
+     <Compile Include="Assets\Scripts\StateMachines\EnemyStateMachine.cs" />
+     <Compile Include="Assets\Scripts\StateMachines\HeroStateMachine.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/Spencer/Documents/ATB System Prototype/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
