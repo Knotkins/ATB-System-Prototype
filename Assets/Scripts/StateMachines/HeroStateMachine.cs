@@ -79,7 +79,7 @@ public GameObject Selector;
                 StartCoroutine(TimeForAction());
 			break;
 			case(TurnState.DEAD):
-                if(!alive)
+                if (!alive)
                 {
                     return;
                 }
@@ -97,19 +97,25 @@ public GameObject Selector;
                     BSM.AttackPanel.SetActive(false);
                     BSM.EnemySelectPanel.SetActive(false);
                     //remove item from performlist
-                    for(int i = 0; i < BSM.PerformList.Count; i++)
+                    if (BSM.HerosInBattle.Count > 0)
                     {
-                        if(BSM.PerformList[i].AttacksGameObject == this.gameObject)
+                        for (int i = 0; i < BSM.PerformList.Count; i++)
                         {
-                            BSM.PerformList.Remove(BSM.PerformList[i]);
+                            if (BSM.PerformList[i].AttacksGameObject == this.gameObject)
+                            {
+                                BSM.PerformList.Remove(BSM.PerformList[i]);
+                            }
+                            if (BSM.PerformList[i].AttakersTarget == this.gameObject)
+                            {
+                                BSM.PerformList[i].AttakersTarget = BSM.HerosInBattle[Random.Range(0, BSM.HerosInBattle.Count)];
+                            }
                         }
+                        //chagne colour / play animation
+                        this.gameObject.GetComponent<MeshRenderer>().material.color = new Color32(105, 105, 105, 255);
+                        //reset heroinput
+                        BSM.battleStates = BattleStateMachine.PerformAction.CHECK;
+                        alive = false;
                     }
-                    //chagne colour / play animation
-                    this.gameObject.GetComponent<MeshRenderer>().material.color = new Color32(105, 105, 105, 255);
-                    //reset heroinput
-                    BSM.battleStates = BattleStateMachine.PerformAction.CHECK;
-                    alive = false;
-                    
                 }
 			break;
 		}
@@ -146,12 +152,20 @@ public GameObject Selector;
         //remove this performer from list in BSM
         BSM.PerformList.RemoveAt(0);
         //reset BSM -> WAIT
-        BSM.battleStates = BattleStateMachine.PerformAction.WAIT;
-        //end coroutine
-        actionStarted = false;
-        //reset this enemy TurnState
-        cur_cooldown = 0.0f;
-        currentState = TurnState.PROCESSING;
+        if (BSM.battleStates != BattleStateMachine.PerformAction.WIN && BSM.battleStates != BattleStateMachine.PerformAction.LOSE)
+        {
+
+            BSM.battleStates = BattleStateMachine.PerformAction.WAIT;
+            //end coroutine
+            actionStarted = false;
+            //reset this enemy TurnState
+            cur_cooldown = 0.0f;
+            currentState = TurnState.PROCESSING;
+        }
+        else
+        {
+            currentState = TurnState.WAITING;
+        }
     }
     private bool MoveTowardsEnemy(Vector3 target)
     {

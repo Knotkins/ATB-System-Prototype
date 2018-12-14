@@ -210,7 +210,7 @@ Prefab:
     - target: {fileID: 114435639542524186, guid: 75da3f3dfe7738d4b8c2f4a5cf4d2c6d,
         type: 2}
       propertyPath: hero.MagicAttacks.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4241577166855156, guid: 75da3f3dfe7738d4b8c2f4a5cf4d2c6d, type: 2}
       propertyPath: m_LocalPosition.x
