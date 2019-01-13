@@ -63,9 +63,12 @@
      <Compile Include="Assets\Scripts\BaseClass\BaseClass.cs" />
      <Compile Include="Assets\Scripts\BaseClass\BaseEnemy.cs" />
      <Compile Include="Assets\Scripts\BaseClass\BaseHero.cs" />
+     <Compile Include="Assets\Scripts\CollisionHandler.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GUI\EnemySelectButton.cs" />
      <Compile Include="Assets\Scripts\GUI\HeroPanelStats.cs" />
      <Compile Include="Assets\Scripts\HandleTurns.cs" />
+     <Compile Include="Assets\Scripts\HeroMovement.cs" />
      <Compile Include="Assets\Scripts\StateMachines\BattleStateMachine.cs" />
      <Compile Include="Assets\Scripts\StateMachines\EnemyStateMachine.cs" />
      <Compile Include="Assets\Scripts\StateMachines\HeroStateMachine.cs" />
