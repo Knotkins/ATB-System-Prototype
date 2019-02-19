@@ -5,6 +5,8 @@ using UnityEngine;
 public class HeroMovement : MonoBehaviour {
 
     float moveSpeed = 10.0f;
+    Vector3 curPos, lastPos;
+
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +20,17 @@ public class HeroMovement : MonoBehaviour {
 
         Vector3 movement = new Vector3(moveX, 0.0f, moveZ);
         GetComponent<Rigidbody>().velocity = movement * moveSpeed;// * Time.deltaTime;
+
+        curPos = transform.position;
+        if(curPos == lastPos)
+        {
+            GameManager.instance.isWalking = false;
+        }
+        else
+        {
+            GameManager.instance.isWalking = true;
+        }
+        lastPos = curPos;
 	}
 
     void OnTriggerEnter(Collider other)
@@ -28,6 +41,20 @@ public class HeroMovement : MonoBehaviour {
             GameManager.instance.nextHeroPosition = col.spawnPoint.transform.position;
             GameManager.instance.sceneToLoad = col.sceneToLoad;
             GameManager.instance.LoadNextScene();
+        }
+    }
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Region1" || other.tag == "Region2")
+        {
+            GameManager.instance.canEncounter = true;
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Region1" || other.tag == "Region2")
+        {
+            GameManager.instance.canEncounter = false;
         }
     }
 }

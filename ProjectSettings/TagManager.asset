@@ -9,6 +9,8 @@ TagManager:
   - DeadHero
   - DeadEnemy
   - Portal
+  - Region1
+  - Region2
   layers:
   - Default
   - TransparentFX

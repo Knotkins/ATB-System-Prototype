@@ -259,7 +259,7 @@ BoxCollider:
   m_GameObject: {fileID: 654562629}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -349,7 +349,7 @@ BoxCollider:
   m_GameObject: {fileID: 673537182}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -440,7 +440,7 @@ BoxCollider:
   m_GameObject: {fileID: 709271297}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -621,7 +621,7 @@ BoxCollider:
   m_GameObject: {fileID: 860854050}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -711,7 +711,7 @@ BoxCollider:
   m_GameObject: {fileID: 896711017}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1115,7 +1115,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4048928087842120, guid: 6249cc501f02d1443b4c288264598aca, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: 4048928087842120, guid: 6249cc501f02d1443b4c288264598aca, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1153,7 +1153,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1417771244}
-  - component: {fileID: 1417771243}
   m_Layer: 0
   m_Name: Town
   m_TagString: Untagged
@@ -1161,19 +1160,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1417771243
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 65705546043429496, guid: bfd2d9419018e7746a94896b170f26f9,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1417771241}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 12, y: 6, z: 12}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!4 &1417771244
 Transform:
   m_ObjectHideFlags: 0
@@ -1357,7 +1343,7 @@ BoxCollider:
   m_GameObject: {fileID: 2000430240}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1447,7 +1433,7 @@ MeshCollider:
   m_GameObject: {fileID: 2088567708}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14

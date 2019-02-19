@@ -7,6 +7,17 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance;
 
+    //Class random monster
+    [System.Serializable]
+    public class RegionData
+    {
+        public string regionName;
+        public int maxEnemyAmt = 4; //max amount of enemies in one region
+        public List<GameObject> possibleEnemies = new List<GameObject>();
+    }
+
+    public List<RegionData> Regions = new List<RegionData>();
+
     public GameObject heroCharacter;
 
     //Positions
@@ -16,6 +27,21 @@ public class GameManager : MonoBehaviour {
     //Scenes
     public string sceneToLoad;
     public string lastScene; //for battle
+
+    //Bool Box
+    public bool isWalking = false;
+    public bool canEncounter = false;
+    public bool getEncounter = false;
+
+    //enums
+    public enum GameStates
+    {
+        WORLD_STATE,
+        TOWN_STATE,
+        BATTLE_STATE,
+        IDLE
+    }
+    public GameStates gameState;
 
 	// Use this for initialization
 	void Awake () {
@@ -40,8 +66,54 @@ public class GameManager : MonoBehaviour {
             Hero.name = "HeroCharacter";
         }
 	}
+
+    void Update()
+    {
+        switch (gameState)
+        {
+            case (GameStates.WORLD_STATE):
+                if (isWalking)
+                {
+                    RandomEncounter();
+                }
+                if (getEncounter)
+                {
+                    gameState = GameStates.BATTLE_STATE;
+                }
+                break;
+            case (GameStates.TOWN_STATE):
+
+                break;
+            case (GameStates.BATTLE_STATE):
+                //load battle scene
+
+                //go to idle
+                break;
+            case (GameStates.IDLE):
+
+                break;
+        }
+    }
+
     public void LoadNextScene()
     {
         SceneManager.LoadScene(sceneToLoad);
+    }
+
+    void RandomEncounter()
+    {
+        if (isWalking && canEncounter)
+        {
+            if (Random.Range(0, 1000) < 10)
+            {
+                Debug.Log("Got Ambushed!");
+                getEncounter = true;
+            }
+        }
+    }
+
+    void StartBattle()
+    {
+
     }
 }
