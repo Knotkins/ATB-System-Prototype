@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\InventoryScreenManager.cs" />
      <Compile Include="Assets\Scripts\Attacks\AttackButton.cs" />
      <Compile Include="Assets\Scripts\Attacks\BaseAttack.cs" />
      <Compile Include="Assets\Scripts\Attacks\MagicAttacks\Fire1Spell.cs" />
@@ -63,12 +64,26 @@
      <Compile Include="Assets\Scripts\BaseClass\BaseClass.cs" />
      <Compile Include="Assets\Scripts\BaseClass\BaseEnemy.cs" />
      <Compile Include="Assets\Scripts\BaseClass\BaseHero.cs" />
+     <Compile Include="Assets\Scripts\CameraFollow.cs" />
+     <Compile Include="Assets\Scripts\Chest.cs" />
      <Compile Include="Assets\Scripts\CollisionHandler.cs" />
+     <Compile Include="Assets\Scripts\Dialogue.cs" />
+     <Compile Include="Assets\Scripts\DialogueManager.cs" />
+     <Compile Include="Assets\Scripts\DialogueTrigger.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GUI\EnemySelectButton.cs" />
      <Compile Include="Assets\Scripts\GUI\HeroPanelStats.cs" />
      <Compile Include="Assets\Scripts\HandleTurns.cs" />
      <Compile Include="Assets\Scripts\HeroMovement.cs" />
+     <Compile Include="Assets\Scripts\Items\Consumable.cs" />
+     <Compile Include="Assets\Scripts\Items\Equippable.cs" />
+     <Compile Include="Assets\Scripts\Items\Inventory.cs" />
+     <Compile Include="Assets\Scripts\Items\Item.cs" />
+     <Compile Include="Assets\Scripts\LevelData.cs" />
+     <Compile Include="Assets\Scripts\PartyMember.cs" />
+     <Compile Include="Assets\Scripts\pauseManager.cs" />
+     <Compile Include="Assets\Scripts\PlayerDungeon.cs" />
+     <Compile Include="Assets\Scripts\SoundManager.cs" />
      <Compile Include="Assets\Scripts\StateMachines\BattleStateMachine.cs" />
      <Compile Include="Assets\Scripts\StateMachines\EnemyStateMachine.cs" />
      <Compile Include="Assets\Scripts\StateMachines\HeroStateMachine.cs" />

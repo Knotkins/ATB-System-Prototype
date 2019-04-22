@@ -40,6 +40,8 @@ public GameObject Selector;
 
     // Use this for initialization
     void Start () {
+        //find hero panel
+        //HeroPanel = GameObject.Find("HeroBar");
         //find spacer obj
         HeroPanelSpacer = GameObject.Find("BattleCanvas").transform.Find("HeroPanel").transform.Find("HeroPanelSpacer");
         //create panel, fill w/ info

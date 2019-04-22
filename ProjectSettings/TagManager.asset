@@ -11,6 +11,10 @@ TagManager:
   - Portal
   - Region1
   - Region2
+  - DungeonWall
+  - DungeonDoor
+  - Chest
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -21,7 +25,7 @@ TagManager:
   - 
   - 
   - PlayerAndWalls
-  - 
+  - EncounterZone
   - 
   - 
   - 

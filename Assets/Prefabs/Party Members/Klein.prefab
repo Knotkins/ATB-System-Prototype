@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1063800158979362}
+  m_IsPrefabAsset: 1
+--- !u!1 &1063800158979362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4817233503343576}
+  - component: {fileID: 114164333369693312}
+  - component: {fileID: 114638862828605158}
+  m_Layer: 0
+  m_Name: Klein
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4817233503343576
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1063800158979362}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114164333369693312
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1063800158979362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7312cb19dcf233b43a6206d9cd4e809b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charName: Klein
+  maxHP: 250
+  curHP: 205
+  maxMP: 100
+  curMP: 100
+  level: 1
+  EXP: 0
+  toNextLevel: 100
+  portrait: {fileID: 21300000, guid: 50a1f78c9fe3d60408a2e8800e86d87e, type: 3}
+--- !u!114 &114638862828605158
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1063800158979362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e5f0bb7038f0454ea02339e7a3ce235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hero:
+    theName: Klein
+    baseHP: 250
+    curHP: 205
+    baseMP: 100
+    curMP: 100
+    baseATK: 10
+    curATK: 10
+    baseDEF: 3
+    curDEF: 3
+    attacks:
+    - {fileID: 114559695975636602, guid: 7d15a2f87a3372d43b93853086122d24, type: 2}
+    stamina: 10
+    intelect: 10
+    dexterity: 10
+    agility: 10
+    MagicAttacks:
+    - {fileID: 114806226753075924, guid: 8a3f5406eb3360c4988ee8b9c7bcfcaa, type: 2}
+    - {fileID: 114330458266329586, guid: 3d6e4922e878a684d90d72c475e2b06c, type: 2}
+  currentState: 0
+  Selector: {fileID: 0}
+  EnemyToAttack: {fileID: 0}
+  HeroPanel: {fileID: 1487399035411868, guid: 611f9fd4504a3b84caec2fe132c7f62c, type: 2}

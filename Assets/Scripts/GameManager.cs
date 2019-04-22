@@ -13,12 +13,17 @@ public class GameManager : MonoBehaviour {
     {
         public string regionName;
         public int maxEnemyAmt = 4; //max amount of enemies in one region
+        public string BattleScene;
         public List<GameObject> possibleEnemies = new List<GameObject>();
     }
+
+    public int curRagion;
 
     public List<RegionData> Regions = new List<RegionData>();
 
     public GameObject heroCharacter;
+
+    public List<PartyMember> party = new List<PartyMember>();
 
     //Positions
     public Vector3 nextHeroPosition;
@@ -39,8 +44,15 @@ public class GameManager : MonoBehaviour {
         WORLD_STATE,
         TOWN_STATE,
         BATTLE_STATE,
+        DUNGEON_STATE,
         IDLE
     }
+
+    public int enemyAmt;
+    public int heroAmt;
+    public List<GameObject> enemiesToBattle = new List<GameObject>();
+    public List<GameObject> heroesToBattle = new List<GameObject>();
+
     public GameStates gameState;
 
 	// Use this for initialization
@@ -60,10 +72,13 @@ public class GameManager : MonoBehaviour {
         //set this to be not destroyable
         DontDestroyOnLoad(gameObject);
         //if no hero is found, make one
-        if(!GameObject.Find("HeroCharacter"))
+        if (gameState == GameStates.WORLD_STATE || gameState == GameStates.TOWN_STATE)
         {
-            GameObject Hero = Instantiate(heroCharacter, nextHeroPosition, Quaternion.identity) as GameObject;
-            Hero.name = "HeroCharacter";
+            if (!GameObject.Find("HeroCharacter"))
+            {
+                GameObject Hero = Instantiate(heroCharacter, nextHeroPosition, Quaternion.identity) as GameObject;
+                Hero.name = "HeroCharacter";
+            }
         }
 	}
 
@@ -86,8 +101,12 @@ public class GameManager : MonoBehaviour {
                 break;
             case (GameStates.BATTLE_STATE):
                 //load battle scene
-
+                StartBattle();
+                gameState = GameStates.IDLE;
                 //go to idle
+                break;
+            case (GameStates.DUNGEON_STATE):
+                //Dungeon encounter RNG stuff here
                 break;
             case (GameStates.IDLE):
 
@@ -98,6 +117,11 @@ public class GameManager : MonoBehaviour {
     public void LoadNextScene()
     {
         SceneManager.LoadScene(sceneToLoad);
+    }
+
+    public void LoadSceneAfterBattle()
+    {
+        SceneManager.LoadScene(lastScene);
     }
 
     void RandomEncounter()
@@ -114,6 +138,19 @@ public class GameManager : MonoBehaviour {
 
     void StartBattle()
     {
+        enemyAmt = Random.Range(1, Regions[curRagion].maxEnemyAmt + 1);
 
+        for(int i = 0; i< enemyAmt; i++)
+        {
+            enemiesToBattle.Add(Regions[curRagion].possibleEnemies[Random.Range(0, Regions[curRagion].possibleEnemies.Count)]);
+        }
+        lastHeroPosition = GameObject.Find("HeroCharacter").gameObject.transform.position;
+        nextHeroPosition = lastHeroPosition;
+        lastScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(Regions[curRagion].BattleScene);
+
+        isWalking = false;
+        canEncounter = false;
+        getEncounter = false;
     }
 }

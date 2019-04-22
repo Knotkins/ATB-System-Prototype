@@ -38,9 +38,22 @@ public class HeroMovement : MonoBehaviour {
         if(other.tag == "Portal")
         {
             CollisionHandler col = other.gameObject.GetComponent<CollisionHandler>();
-            GameManager.instance.nextHeroPosition = col.spawnPoint.transform.position;
+            if (col.spawnPoint)
+            {
+                GameManager.instance.nextHeroPosition = col.spawnPoint.transform.position;
+            }
+           
             GameManager.instance.sceneToLoad = col.sceneToLoad;
             GameManager.instance.LoadNextScene();
+        }
+        if(other.tag == "Region1")
+        {
+            GameManager.instance.curRagion = 0;
+        }
+        if (other.tag == "Region2")
+        {
+            GameManager.instance.curRagion = 1;
+
         }
     }
     void OnTriggerStay(Collider other)

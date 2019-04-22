@@ -38,6 +38,7 @@ public class BattleStateMachine : MonoBehaviour {
 	public GameObject AttackPanel;
 	public GameObject EnemySelectPanel;
     public GameObject MagicsPanel;
+    public GameObject ItemPanel;
 
     //magic attacks
     public Transform actionSpacer;
@@ -46,20 +47,62 @@ public class BattleStateMachine : MonoBehaviour {
     private List<GameObject> atkBtns = new List<GameObject>();
     public GameObject magicButton;
 
+    public Transform itemSpacer;
+
+    public GameObject heroBase;
+
     //enemy buttons
     private List<GameObject> enemyBtns = new List<GameObject>();
 
+    public List<Transform> spawnPoints = new List<Transform>();
+    public List<Transform> heroSpawnPoints = new List<Transform>();
+
+    void Awake()
+    {
+        for (int i = 0; i < GameManager.instance.enemyAmt; i++)
+        {
+            GameObject NewEnemy = Instantiate(GameManager.instance.enemiesToBattle[i], spawnPoints[i].position, Quaternion.identity) as GameObject;
+            NewEnemy.name = NewEnemy.GetComponent<EnemyStateMachine>().enemy.theName + "_" + (i + 1);
+            NewEnemy.GetComponent<EnemyStateMachine>().enemy.theName = NewEnemy.name;
+            EnemiesInBattle.Add(NewEnemy);
+        }
+
+        for (int i = 0; i < GameManager.instance.party.Count; i++)
+        {
+            GameObject NewHero = Instantiate(heroBase, heroSpawnPoints[i].position, Quaternion.identity) as GameObject;
+            NewHero.name = GameManager.instance.party[i].charName;
+            NewHero.GetComponent<HeroStateMachine>().hero.baseHP = GameManager.instance.party[i].GetComponent<HeroStateMachine>().hero.baseHP;
+            NewHero.GetComponent<HeroStateMachine>().hero.curHP = GameManager.instance.party[i].GetComponent<HeroStateMachine>().hero.curHP;
+            NewHero.GetComponent<HeroStateMachine>().hero.baseMP = GameManager.instance.party[i].GetComponent<HeroStateMachine>().hero.baseMP;
+            NewHero.GetComponent<HeroStateMachine>().hero.curMP = GameManager.instance.party[i].GetComponent<HeroStateMachine>().hero.curMP;
+            NewHero.GetComponent<HeroStateMachine>().hero.baseATK = GameManager.instance.party[i].GetComponent<HeroStateMachine>().hero.baseATK;
+            NewHero.GetComponent<HeroStateMachine>().hero.curATK = GameManager.instance.party[i].GetComponent<HeroStateMachine>().hero.curATK;
+            NewHero.GetComponent<HeroStateMachine>().hero.baseDEF = GameManager.instance.party[i].GetComponent<HeroStateMachine>().hero.baseDEF;
+            NewHero.GetComponent<HeroStateMachine>().hero.curDEF = GameManager.instance.party[i].GetComponent<HeroStateMachine>().hero.curDEF;
+
+            NewHero.GetComponent<HeroStateMachine>().hero.attacks = GameManager.instance.party[i].GetComponent<HeroStateMachine>().hero.attacks;
+            NewHero.GetComponent<HeroStateMachine>().hero.MagicAttacks = GameManager.instance.party[i].GetComponent<HeroStateMachine>().hero.MagicAttacks;
+
+            NewHero.GetComponent<HeroStateMachine>().HeroPanel = GameManager.instance.party[i].GetComponent<HeroStateMachine>().HeroPanel;
+
+
+
+            NewHero.GetComponent<HeroStateMachine>().hero.theName = NewHero.name;
+           HerosInBattle.Add(NewHero);
+        }
+    }
 
 	// Use this for initialization
 	void Start () {
 		battleStates = PerformAction.WAIT;
-		EnemiesInBattle.AddRange (GameObject.FindGameObjectsWithTag ("Enemy"));
-		HerosInBattle.AddRange (GameObject.FindGameObjectsWithTag ("Hero"));
+		//EnemiesInBattle.AddRange (GameObject.FindGameObjectsWithTag ("Enemy"));
+		//HerosInBattle.AddRange (GameObject.FindGameObjectsWithTag ("Hero"));
 		HeroInput = HeroGUI.ACTIVATE;
 
 		AttackPanel.SetActive (false);
 		EnemySelectPanel.SetActive (false);
         MagicsPanel.SetActive(false);
+        ItemPanel.SetActive(false);
 
 		EnemyButtons();
 	}
@@ -130,7 +173,15 @@ public class BattleStateMachine : MonoBehaviour {
                     for(int i = 0; i< HerosInBattle.Count; i++)
                     {
                         HerosInBattle[i].GetComponent<HeroStateMachine>().currentState = HeroStateMachine.TurnState.WAITING;
+                        GameManager.instance.party[i].GetComponent<HeroStateMachine>().hero.curHP = HerosInBattle[i].GetComponent<HeroStateMachine>().hero.curHP;
+                        GameManager.instance.party[i].curHP = HerosInBattle[i].GetComponent<HeroStateMachine>().hero.curHP;
+
+                        GameManager.instance.party[i].GetComponent<HeroStateMachine>().hero.curMP = HerosInBattle[i].GetComponent<HeroStateMachine>().hero.curMP;
+                        GameManager.instance.party[i].curMP = HerosInBattle[i].GetComponent<HeroStateMachine>().hero.curMP;
                     }
+                    GameManager.instance.LoadSceneAfterBattle();
+                    GameManager.instance.gameState = GameManager.GameStates.WORLD_STATE;
+                    GameManager.instance.enemiesToBattle.Clear();
                 }
             break;
         }
@@ -237,7 +288,14 @@ public class BattleStateMachine : MonoBehaviour {
         MagicAttackButton.transform.SetParent(actionSpacer, false);
         atkBtns.Add(MagicAttackButton);
 
-        if(HerosToManage[0].GetComponent<HeroStateMachine>().hero.MagicAttacks.Count > 0)
+        GameObject ItemAttackButton = Instantiate(actionButton) as GameObject;
+        Text ItemMenuButtonText = ItemAttackButton.transform.Find("Text").gameObject.GetComponent<Text>();
+        ItemMenuButtonText.text = "Item";
+        ItemAttackButton.GetComponent<Button>().onClick.AddListener(() => Input5());
+        ItemAttackButton.transform.SetParent(actionSpacer, false);
+        atkBtns.Add(ItemAttackButton);
+
+        if (HerosToManage[0].GetComponent<HeroStateMachine>().hero.MagicAttacks.Count > 0)
         {
             foreach (BaseAttack magicAtk in HerosToManage[0].GetComponent<HeroStateMachine>().hero.MagicAttacks)
             {
@@ -255,6 +313,27 @@ public class BattleStateMachine : MonoBehaviour {
         {
             MagicAttackButton.GetComponent<Button>().interactable = false;
         }
+
+        if (GameManager.instance.GetComponent<Inventory>().Inv.Count > 0)
+        {
+            for (int i = 0; i < GameManager.instance.GetComponent<Inventory>().Inv.Count; i++)
+            
+            {
+                    if (GameManager.instance.GetComponent<Inventory>().Inv[i] is Consumable)
+                    {
+                    Consumable consumeable = GameManager.instance.GetComponent<Inventory>().Inv[i] as Consumable;
+                        GameObject ItemButton = Instantiate(magicButton) as GameObject;
+                        Text MagicButtonText = ItemButton.transform.Find("Text").gameObject.GetComponent<Text>();
+                        MagicButtonText.text = consumeable.itemName;
+                        AttackButton ATB = ItemButton.GetComponent<AttackButton>();
+                        ATB.magicAttackToPerform = consumeable.useEffect;
+                        ItemButton.transform.SetParent(itemSpacer, false);
+                        atkBtns.Add(ItemButton);
+
+                    }
+                
+            }
+        }
     }
 
     public void Input4(BaseAttack chosenMagic) //chosen magic attack
@@ -265,6 +344,7 @@ public class BattleStateMachine : MonoBehaviour {
         HerosToManage[0].GetComponent<HeroStateMachine>().hero.curMP -= chosenMagic.attackCost;
 
         HeroChoice.chosenAttack = chosenMagic;
+        ItemPanel.SetActive(false);
         MagicsPanel.SetActive(false);
         EnemySelectPanel.SetActive(true);
     }
@@ -273,5 +353,11 @@ public class BattleStateMachine : MonoBehaviour {
     {
         AttackPanel.SetActive(false);
         MagicsPanel.SetActive(true);
+    }
+
+    public void Input5() //switching to Item attack 
+    {
+        AttackPanel.SetActive(false);
+        ItemPanel.SetActive(true);
     }
 }

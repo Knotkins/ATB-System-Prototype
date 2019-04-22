@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4575065674712616}
   - component: {fileID: 114659044131497490}
+  - component: {fileID: 114388012312740418}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -40,6 +41,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114388012312740418
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1327767853741514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d49f05b6ed544e49bf53f6c342395e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Inv:
+  - {fileID: 114007013242478990, guid: fd84f8d3f0f055f4caff55f4ac0ad976, type: 2}
+  - {fileID: 114571060488616692, guid: bf1e4cc48b05c2c4186b3d4e311a80aa, type: 2}
 --- !u!114 &114659044131497490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,9 +66,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e261ce4a8b932d945bb1e62e7c4cbf40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curRagion: 0
+  Regions:
+  - regionName: region1
+    maxEnemyAmt: 4
+    BattleScene: BattleScene
+    possibleEnemies:
+    - {fileID: 1090052245904830, guid: cd6ebf22c4d681145903daa4bedcaada, type: 2}
+    - {fileID: 1248603866860140, guid: 50a112e361be02b459abbcb327e27e5d, type: 2}
+  - regionName: region2
+    maxEnemyAmt: 4
+    BattleScene: BattleScene
+    possibleEnemies:
+    - {fileID: 1090052245904830, guid: cd6ebf22c4d681145903daa4bedcaada, type: 2}
   heroCharacter: {fileID: 1719177343302844, guid: 149b89bc57368484fa9e8a39929b5367,
     type: 2}
+  party:
+  - {fileID: 114164333369693312, guid: 091ed111763355944a393ac4d5ddcc09, type: 2}
+  - {fileID: 114969593455144410, guid: 80b3e356e00ab7b4984c86d31b25babb, type: 2}
   nextHeroPosition: {x: 0, y: 0, z: 0}
   lastHeroPosition: {x: 0, y: 0, z: 0}
   sceneToLoad: 
   lastScene: 
+  isWalking: 0
+  canEncounter: 0
+  getEncounter: 0
+  enemyAmt: 0
+  enemiesToBattle: []
+  gameState: 1
